@@ -4,7 +4,6 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/route_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:myapp/utils/env.dart';
-import 'package:myapp/widgets/confirm_box.dart';
 import 'package:uuid/uuid.dart';
 
 void showSnackBar(String title, String msg) {

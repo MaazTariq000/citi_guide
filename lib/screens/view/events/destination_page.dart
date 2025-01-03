@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myapp/modal/destination.dart'; // Ensure you import your Destination model
 import 'package:myapp/widgets/home/list_tile.dart';
 
 class DestinationPage extends StatelessWidget {
@@ -6,6 +8,9 @@ class DestinationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Retrieve the destination passed from HomePage
+    final Destination destination = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -26,14 +31,12 @@ class DestinationPage extends StatelessWidget {
                     Container(
                       height: 350,
                       width: double.infinity,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
                           Radius.circular(10),
                         ),
                         image: DecorationImage(
-                          image: NetworkImage(
-                            "https://plus.unsplash.com/premium_photo-1722593856044-e5176ca19a5f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8a3lvdG98ZW58MHx8MHx8fDA%3D",
-                          ),
+                          image: NetworkImage(destination.imageUrl),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -59,30 +62,31 @@ class DestinationPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
                   child: Row(
                     children: [
                       Icon(
                         Icons.location_pin,
                         size: 22,
-                        color: Color(0xFFF88C49),
+                        color: const Color(0xFFF88C49),
                       ),
                       Text(
-                        "Kyoto, Japan",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xFFF88C49)),
+                        destination.location,
+                        style: const TextStyle(
+                            fontSize: 15, color: Color(0xFFF88C49)),
                       ),
                     ],
                   ),
                 ),
-                const Text(
-                  "Fushimi Inari Shrine",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                Text(
+                  destination.title,
+                  style: const TextStyle(
+                      fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                const Text(
-                  "Mountainside Shinto shrine dating from 711 A.D. featuring a path with hundreds of traditional gates.",
-                  style: TextStyle(
+                Text(
+                  destination.description,
+                  style: const TextStyle(
                     fontSize: 14,
                   ),
                 ),
@@ -104,9 +108,9 @@ class DestinationPage extends StatelessWidget {
                           size: 18,
                           color: Colors.yellow,
                         ),
-                        label: const Text(
-                          "4.8",
-                          style: TextStyle(
+                        label: Text(
+                          destination.rating.toString(),
+                          style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w400,
                               color: Colors.black),
@@ -133,13 +137,13 @@ class DestinationPage extends StatelessWidget {
                             color: Color(0xFFF88C49),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
-                const Text(
-                  "Services in Fushimi Inari Shrine",
-                  style: TextStyle(
+                Text(
+                  "Services in ${destination.title}",
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
@@ -154,14 +158,10 @@ class DestinationPage extends StatelessWidget {
         onPressed: () {},
         style: ButtonStyle(
           padding: WidgetStateProperty.all(
-            EdgeInsets.symmetric(
-              horizontal: 5,
-            ),
+            EdgeInsets.symmetric(horizontal: 5),
           ),
           minimumSize: WidgetStateProperty.all(const Size(150, 50)),
-          backgroundColor: WidgetStateProperty.all(
-            const Color(0xFFF88C49),
-          ),
+          backgroundColor: WidgetStateProperty.all(const Color(0xFFF88C49)),
           foregroundColor: WidgetStateProperty.all(Colors.white),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(

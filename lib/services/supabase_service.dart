@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:myapp/modal/city_modal.dart';
 // import 'package:http/http.dart';
 import 'package:myapp/utils/env.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/modal/destination.dart';
 import 'package:myapp/routes/route_name.dart';
-import 'package:myapp/screens/view/events/destination_page.dart';
 import 'package:myapp/services/supabase_service.dart';
 import 'package:myapp/widgets/circle_image.dart';
 import 'package:myapp/widgets/home/list_tile.dart';
@@ -23,23 +22,6 @@ class _HomePageState extends State<HomePage> {
     "Parks",
     "Famous"
   ];
-
-  // final List<String> title = [
-  //   "Mazar-e-Quaid ",
-  //   "Eifel Tower.",
-  //   "Statue Of Liberty",
-  //   "Mount Fuji",
-  //   "The Great Sphinx"
-  // ];
-  // final List<String> location = ["krachi", "Pakistan"];
-
-  // final List<String> cardImages = [
-  //   "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Jinnah_Mausoleum.JPG/1200px-Jinnah_Mausoleum.JPG",
-  //   "https://ihplb.b-cdn.net/wp-content/uploads/2021/11/eifel-tower.jpg",
-  //   "https://www.planetware.com/wpimages/2020/08/top-attractions-in-the-world-new-york-statue-of-liberty.jpg",
-  //   "https://www.planetware.com/wpimages/2019/10/asia-best-places-to-visit-mount-fuji-japan.jpg",
-  //   "https://www.pandotrip.com/wp-content/uploads/2018/03/The-Great-Sphinx-Egypt.jpg"
-  // ];
 
   final List<Destination> destinations = [
     Destination(
@@ -218,7 +200,11 @@ class _HomePageState extends State<HomePage> {
                     final destination = destinations[index];
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RouteName.destinationPage);
+                        // Navigate to the destination page and pass the destination object
+                        Get.toNamed(
+                          RouteName.destinationPage,
+                          arguments: destination, // Pass the destination object
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -230,9 +216,7 @@ class _HomePageState extends State<HomePage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                    destination.imageUrl,
-                                  ),
+                                  image: NetworkImage(destination.imageUrl),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -248,7 +232,8 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
@@ -264,16 +249,14 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_pin,
                                             size: 10,
                                           ),
-                                          SizedBox(
-                                            width: 2,
-                                          ),
+                                          const SizedBox(width: 2),
                                           Text(
                                             destination.location,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 10,
                                               color: Colors.grey,
                                             ),
@@ -282,21 +265,22 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.star,
                                             size: 10,
                                             color: Colors.yellow,
                                           ),
                                           Text(
                                             destination.rating.toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           Text(
                                             " ${destination.reviews} Reviews",
-                                            style: TextStyle(fontSize: 10),
+                                            style:
+                                                const TextStyle(fontSize: 10),
                                           ),
                                         ],
                                       ),
