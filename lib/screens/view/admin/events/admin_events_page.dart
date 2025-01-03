@@ -19,7 +19,6 @@ class _AdminEventsPageState extends State<AdminEventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(onPressed: () {}, icon: const Icon(Icons.notes)),
         title: const Text("Event Page"),
         centerTitle: true,
       ),
@@ -41,14 +40,23 @@ class _AdminEventsPageState extends State<AdminEventsPage> {
             AdminItemList(
               title: "New year 2025",
               navLink: RouteName.adminEventEditPage,
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
             AdminItemList(
               navLink: RouteName.adminEventEditPage,
               title: "Independence Day",
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
             AdminItemList(
               navLink: RouteName.adminEventEditPage,
               title: "Bablo ki Shadi",
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
           ],
         ),

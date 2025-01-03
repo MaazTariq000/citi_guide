@@ -7,6 +7,13 @@ class DestinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: BackButton(
+          color: Colors.black,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -137,9 +144,7 @@ class DestinationPage extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                const ListTimeHome(),
-                const ListTimeHome(),
-                const ListTimeHome(),
+                ListTimeHome(),
               ],
             ),
           ),

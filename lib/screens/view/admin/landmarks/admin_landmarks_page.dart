@@ -15,7 +15,6 @@ class _AdminLandmarksPageState extends State<AdminLandmarksPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(onPressed: () {}, icon: const Icon(Icons.notes)),
         title: const Text("Landmark Page"),
         centerTitle: true,
       ),
@@ -37,14 +36,23 @@ class _AdminLandmarksPageState extends State<AdminLandmarksPage> {
             AdminItemList(
               navLink: RouteName.adminLandmarkEditPage,
               title: "Fountains",
+              description: "kuch",
+              delete: () {},
+              edit: () {},
             ),
             AdminItemList(
               title: "Waterfall",
               navLink: RouteName.adminLandmarkEditPage,
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
             AdminItemList(
               title: "Beach",
               navLink: RouteName.adminLandmarkEditPage,
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
           ],
         ),

@@ -19,7 +19,6 @@ class _AdminCityPageState extends State<AdminCityPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(onPressed: () {}, icon: const Icon(Icons.notes)),
         title: const Text("City Page"),
         centerTitle: true,
       ),
@@ -41,14 +40,23 @@ class _AdminCityPageState extends State<AdminCityPage> {
             AdminItemList(
               navLink: RouteName.adminCityEditPage,
               title: "Milan",
+              description: "",
+              delete: () {},
+              edit: () {},
             ),
             AdminItemList(
               navLink: RouteName.adminCityEditPage,
               title: "Tokyo",
+              description: "",
+              delete: () {},
+              edit: () {},
             ),
             AdminItemList(
               navLink: RouteName.adminCityEditPage,
               title: "Mumbai",
+              description: "",
+              delete: () {},
+              edit: () {},
             ),
           ],
         ),

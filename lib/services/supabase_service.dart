@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:myapp/modal/city_modal.dart';
 // import 'package:http/http.dart';
 import 'package:myapp/utils/env.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -29,4 +30,36 @@ class SupabaseService extends GetxService {
       },
     );
   }
+
+  // // Fetch cities from the database
+  // static Future<List<City>> fetchCities() async {
+  //   final response = await client.from('city').select().execute();
+  //   if (response.error == null) {
+  //     return (response.data as List)
+  //         .map((city) => City.fromJson(city))
+  //         .toList();
+  //   } else {
+  //     throw response.error!;
+  //   }
+  // }
+
+  // // Delete a city from the database
+  // static Future<void> deleteCity(String cityName) async {
+  //   final response =
+  //       await client.from('city').delete().eq('city_name', cityName).execute();
+  //   if (response.error != null) {
+  //     throw response.error!;
+  //   }
+  // }
+
+  // Update city details
+//   static Future<void> updateCity(City city) async {
+//     final response = await client
+//         .from('city')
+//         .update(city.toJson())
+//         .eq('city_name', city.cityName);
+//     if (response.error != null) {
+//       throw response.error!;
+//     }
+//   }
 }

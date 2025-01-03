@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/modal/destination.dart';
+import 'package:myapp/routes/route_name.dart';
 import 'package:myapp/screens/view/events/destination_page.dart';
 import 'package:myapp/services/supabase_service.dart';
 import 'package:myapp/widgets/circle_image.dart';
@@ -22,6 +24,75 @@ class _HomePageState extends State<HomePage> {
     "Famous"
   ];
 
+  // final List<String> title = [
+  //   "Mazar-e-Quaid ",
+  //   "Eifel Tower.",
+  //   "Statue Of Liberty",
+  //   "Mount Fuji",
+  //   "The Great Sphinx"
+  // ];
+  // final List<String> location = ["krachi", "Pakistan"];
+
+  // final List<String> cardImages = [
+  //   "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Jinnah_Mausoleum.JPG/1200px-Jinnah_Mausoleum.JPG",
+  //   "https://ihplb.b-cdn.net/wp-content/uploads/2021/11/eifel-tower.jpg",
+  //   "https://www.planetware.com/wpimages/2020/08/top-attractions-in-the-world-new-york-statue-of-liberty.jpg",
+  //   "https://www.planetware.com/wpimages/2019/10/asia-best-places-to-visit-mount-fuji-japan.jpg",
+  //   "https://www.pandotrip.com/wp-content/uploads/2018/03/The-Great-Sphinx-Egypt.jpg"
+  // ];
+
+  final List<Destination> destinations = [
+    Destination(
+      title: "Mazar-e-Quaid",
+      location: "Karachi, Pakistan",
+      description:
+          "The mausoleum of Muhammad Ali Jinnah, the founder of Pakistan.",
+      rating: 4.0,
+      reviews: 70,
+      imageUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Jinnah_Mausoleum.JPG/1200px-Jinnah_Mausoleum.JPG",
+    ),
+    Destination(
+      title: "Eiffel Tower",
+      location: "Paris, France",
+      description:
+          "An iconic wrought-iron lattice tower located on the Champ de Mars in Paris.",
+      rating: 4.5,
+      reviews: 150,
+      imageUrl:
+          "https://ihplb.b-cdn.net/wp-content/uploads/2021/11/eifel-tower.jpg",
+    ),
+    Destination(
+      title: "Statue of Liberty",
+      location: "New York City, USA",
+      description:
+          "A colossal neoclassical sculpture on Liberty Island in New York Harbor.",
+      rating: 4.7,
+      reviews: 200,
+      imageUrl:
+          "https://www.planetware.com/wpimages/2020/08/top-attractions-in-the-world-new-york-statue-of-liberty.jpg",
+    ),
+    Destination(
+      title: "Mount Fuji",
+      location: "Honshu, Japan",
+      description:
+          "An active stratovolcano and the highest mountain in Japan, known for its symmetrical cone.",
+      rating: 4.8,
+      reviews: 120,
+      imageUrl:
+          "https://www.planetware.com/wpimages/2019/10/asia-best-places-to-visit-mount-fuji-japan.jpg",
+    ),
+    Destination(
+      title: "The Great Sphinx",
+      location: "Giza, Egypt",
+      description:
+          "A limestone statue of a reclining sphinx, a mythical creature with a lion's body and a human head.",
+      rating: 4.6,
+      reviews: 90,
+      imageUrl:
+          "https://www.pandotrip.com/wp-content/uploads/2018/03/The-Great-Sphinx-Egypt.jpg",
+    ),
+  ];
   final Map<String, IconData> filterIcons = {
     "All": Icons.all_inclusive_outlined,
     "Restaurants": Icons.restaurant_outlined,
@@ -141,12 +212,13 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 190,
                 child: ListView.builder(
-                  itemCount: 5,
+                  itemCount: destinations.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
+                    final destination = destinations[index];
                     return GestureDetector(
                       onTap: () {
-                        Get.to(() => const DestinationPage());
+                        Get.toNamed(RouteName.destinationPage);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -157,9 +229,9 @@ class _HomePageState extends State<HomePage> {
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                image: const DecorationImage(
+                                image: DecorationImage(
                                   image: NetworkImage(
-                                    "https://hips.hearstapps.com/hmg-prod/images/gettyimages-529426770-6504375f0d9d6.jpg?crop=0.671xw:1.00xh;0.151xw,0&resize=640:*",
+                                    destination.imageUrl,
                                   ),
                                   fit: BoxFit.cover,
                                 ),
@@ -175,16 +247,16 @@ class _HomePageState extends State<HomePage> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
-                                child: const Padding(
+                                child: Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 12),
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
-                                        "Some House",
-                                        style: TextStyle(
-                                          fontSize: 14,
+                                        destination.title,
+                                        style: const TextStyle(
+                                          fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -200,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                                             width: 2,
                                           ),
                                           Text(
-                                            "Karachi , Pakistan",
+                                            destination.location,
                                             style: TextStyle(
                                               fontSize: 10,
                                               color: Colors.grey,
@@ -216,14 +288,14 @@ class _HomePageState extends State<HomePage> {
                                             color: Colors.yellow,
                                           ),
                                           Text(
-                                            "4.0",
+                                            destination.rating.toString(),
                                             style: TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           Spacer(),
                                           Text(
-                                            " 70 Reviews",
+                                            " ${destination.reviews} Reviews",
                                             style: TextStyle(fontSize: 10),
                                           ),
                                         ],
@@ -250,9 +322,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 10,
               ),
-              const ListTimeHome(),
-              const ListTimeHome(),
-              const ListTimeHome(),
+              ListTimeHome(),
             ],
           ),
         ),

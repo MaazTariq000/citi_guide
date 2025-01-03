@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/routes/route_name.dart';
-// import 'package:myapp/utils/helpers.dart';
+import 'package:myapp/services/supabase_service.dart'; // Ensure this is imported
 
 class AdminEditPage extends StatefulWidget {
   const AdminEditPage({super.key});
@@ -13,6 +13,89 @@ class AdminEditPage extends StatefulWidget {
 class _AdminEditPageState extends State<AdminEditPage> {
   final TextEditingController countryController = TextEditingController();
   final TextEditingController countryDescription = TextEditingController();
+  bool isEditMode = false;
+  String? originalCountryName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final Map<String, dynamic>? arguments = Get.arguments;
+    if (arguments != null) {
+      // Edit mode
+      isEditMode = true;
+      originalCountryName = arguments['country_name'];
+      countryController.text = arguments['country_name'];
+      countryDescription.text = arguments['country_description'];
+    }
+  }
+
+  Future<void> addCountry() async {
+    String countryName = countryController.text.trim();
+    String description = countryDescription.text.trim();
+
+    if (countryName.isEmpty || description.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Both fields are required!',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    try {
+      if (isEditMode) {
+        // Update existing country
+        final response = await SupabaseService.client
+            .from('country')
+            .update({
+              'country_name': countryName,
+              'country_description': description,
+            })
+            .eq('country_name',
+                originalCountryName ?? '')
+            .select();
+
+        if (response.isNotEmpty) {
+          Get.snackbar(
+            'Success',
+            'Country updated successfully!',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          Get.toNamed(RouteName.adminPage);
+        }
+      } else {
+        // Add new country
+        final response = await SupabaseService.client.from('country').insert({
+          'country_name': countryName,
+          'country_description': description,
+        }).select();
+
+        if (response.isNotEmpty) {
+          Get.snackbar(
+            'Success',
+            'Country added successfully!',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          Get.toNamed(RouteName.adminPage);
+        }
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +111,7 @@ class _AdminEditPageState extends State<AdminEditPage> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: addCountry,
             child: const Text("Done"),
           ),
         ],
@@ -64,7 +147,9 @@ class _AdminEditPageState extends State<AdminEditPage> {
                       "Pick an appropriate image.",
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Handle file selection for image
+                      },
                       icon: const Icon(
                         Icons.attach_file,
                       ),

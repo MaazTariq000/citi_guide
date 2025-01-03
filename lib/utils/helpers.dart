@@ -41,11 +41,14 @@ String getBucketUrl(String path) {
 }
 
 void confirmDialog(
-    String title, String message, String buttonText, VoidCallback callback) {
-  Get.dialog(ConfirmBox(
+    String title, String message, String confirmText, VoidCallback onConfirm) {
+  Get.defaultDialog(
     title: title,
-    message: message,
-    buttonText: buttonText,
-    callback: callback,
-  ));
+    middleText: message,
+    textCancel: 'Cancel',
+    textConfirm: confirmText,
+    onConfirm: onConfirm,
+    buttonColor: Colors.orange,
+    confirmTextColor: Colors.white,
+  );
 }

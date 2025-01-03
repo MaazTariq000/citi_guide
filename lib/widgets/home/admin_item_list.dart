@@ -4,9 +4,20 @@ import 'package:myapp/utils/helpers.dart';
 
 class AdminItemList extends StatelessWidget {
   final String title;
+  final String description;
   final dynamic navLink;
-  // final
-  const AdminItemList({super.key, required this.title, required this.navLink});
+  final VoidCallback delete;
+  final VoidCallback edit;
+
+  const AdminItemList({
+    super.key,
+    required this.title,
+    required this.navLink,
+    required this.description,
+    required this.delete,
+    required this.edit,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,13 +32,10 @@ class AdminItemList extends StatelessWidget {
             Row(
               children: [
                 ElevatedButton.icon(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.blue),
-                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
                   ),
-                  onPressed: () {
-                    Get.toNamed(navLink);
-                  },
+                  onPressed: edit,
                   label: const Text(
                     "Edit",
                     style: TextStyle(color: Colors.white),
@@ -35,30 +43,36 @@ class AdminItemList extends StatelessWidget {
                   icon: const Icon(
                     Icons.edit,
                     size: 16,
+                    color: Colors.white,
                   ),
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
+                const SizedBox(width: 5),
                 IconButton(
-                  color: Colors.white,
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all(Colors.red),
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                      Colors.red,
+                    ),
                   ),
                   onPressed: () {
-                    confirmDialog("Are you sure?",
-                        "Do you want to delete this?", "Delete", () {});
+                    confirmDialog(
+                      "Are you sure?",
+                      "Do you want to delete this?",
+                      "Delete",
+                      delete,
+                    );
+                    Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.delete,
                     size: 18,
+                    color: Colors.white,
                   ),
                 ),
               ],
             ),
           ],
         ),
-        const Divider()
+        const Divider(),
       ],
     );
   }

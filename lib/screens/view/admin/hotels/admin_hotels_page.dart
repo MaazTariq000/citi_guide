@@ -40,14 +40,23 @@ class _AdminHotelsPageState extends State<AdminHotelsPage> {
             AdminItemList(
               navLink: RouteName.adminHotelEditPage,
               title: "1st hotel",
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
             AdminItemList(
               navLink: RouteName.adminHotelEditPage,
               title: "2nd hotel",
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
             AdminItemList(
               navLink: RouteName.adminHotelEditPage,
               title: "3rd hotel",
+              description: "kuch",
+              delete: () {},
+              edit: (){},
             ),
           ],
         ),

@@ -13,6 +13,7 @@ import 'package:myapp/screens/view/admin/hotels/admin_hotels_edit_page.dart';
 import 'package:myapp/screens/view/admin/hotels/admin_hotels_page.dart';
 import 'package:myapp/screens/view/admin/landmarks/admin_landmarks_edit_page.dart';
 import 'package:myapp/screens/view/admin/landmarks/admin_landmarks_page.dart';
+import 'package:myapp/screens/view/events/destination_page.dart';
 import 'package:myapp/screens/view/profile/edit_profile_page.dart';
 
 class Routes {
@@ -30,6 +31,10 @@ class Routes {
       page: () => const SignupPage(),
     ),
     GetPage(
+      name: RouteName.destinationPage,
+      page: () => const DestinationPage(),
+    ),
+    GetPage(
         name: RouteName.editProfilePage,
         page: () => const EditProfilePage(),
         transition: Transition.rightToLeft),
@@ -40,7 +45,7 @@ class Routes {
     ),
     GetPage(
       name: RouteName.adminEditPage,
-      page: () => const AdminEditPage(),
+      page: () => AdminEditPage(),
       transition: Transition.rightToLeft,
     ),
     GetPage(
