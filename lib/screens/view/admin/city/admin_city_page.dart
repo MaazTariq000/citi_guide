@@ -119,6 +119,7 @@ class _AdminCityPageState extends State<AdminCityPage> {
                             title: city['citi_name'],
                             description: city['citi_description'],
                             address: "",
+                            rating: "",
                             delete: () => deleteCities(city['citi_name']),
                             edit: () {
                               Get.toNamed(RouteName.adminCityEditPage,

@@ -22,7 +22,6 @@ class _AdminEditPageState extends State<AdminEditPage> {
 
     final Map<String, dynamic>? arguments = Get.arguments;
     if (arguments != null) {
-      // Edit mode
       isEditMode = true;
       originalCountryName = arguments['country_name'];
       countryController.text = arguments['country_name'];
@@ -47,7 +46,6 @@ class _AdminEditPageState extends State<AdminEditPage> {
 
     try {
       if (isEditMode) {
-        // Update existing country
         final response = await SupabaseService.client
             .from('country')
             .update({
@@ -69,7 +67,6 @@ class _AdminEditPageState extends State<AdminEditPage> {
           Get.toNamed(RouteName.adminPage);
         }
       } else {
-        // Add new country
         final response = await SupabaseService.client.from('country').insert({
           'country_name': countryName,
           'country_description': description,
@@ -148,7 +145,6 @@ class _AdminEditPageState extends State<AdminEditPage> {
                     ),
                     IconButton(
                       onPressed: () {
-                        // Handle file selection for image
                       },
                       icon: const Icon(
                         Icons.attach_file,

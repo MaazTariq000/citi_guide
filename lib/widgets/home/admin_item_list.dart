@@ -5,6 +5,7 @@ class AdminItemList extends StatelessWidget {
   final String title;
   final String description;
   final String address;
+  final String rating;
   final dynamic navLink;
   final VoidCallback delete;
   final VoidCallback edit;
@@ -17,6 +18,7 @@ class AdminItemList extends StatelessWidget {
     required this.delete,
     required this.edit,
     required this.address,
+    required this.rating,
   });
 
   @override
@@ -59,9 +61,11 @@ class AdminItemList extends StatelessWidget {
                       "Are you sure?",
                       "Do you want to delete this?",
                       "Delete",
-                      delete,
+                      () {
+                        delete(); 
+                        Navigator.pop(context);
+                      },
                     );
-                    Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.delete,

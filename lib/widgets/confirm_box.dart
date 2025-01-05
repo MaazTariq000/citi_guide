@@ -10,7 +10,8 @@ class ConfirmBox extends StatelessWidget {
     super.key,
     required this.title,
     required this.message,
-    required this.callback, required this.buttonText,
+    required this.callback,
+    required this.buttonText,
   });
   final primaryColor = const Color(0xFFF88C49);
   final accentColor = const Color(0xffffffff);

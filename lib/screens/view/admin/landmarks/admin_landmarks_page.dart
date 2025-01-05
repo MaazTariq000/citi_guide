@@ -121,10 +121,11 @@ class _AdminLandmarksPageState extends State<AdminLandmarksPage> {
                               title: landmark['landMark_name'],
                               description: landmark['landMark_description'],
                               address: landmark['landMark_address'],
+                              rating: "",
                               delete: () =>
                                   deleteLandmarks(landmark['landMark_name']),
                               edit: () {
-                                Get.toNamed(RouteName.adminLandmarkPage,
+                                Get.toNamed(RouteName.adminLandmarkEditPage,
                                     arguments: landmark);
                               },
                             );

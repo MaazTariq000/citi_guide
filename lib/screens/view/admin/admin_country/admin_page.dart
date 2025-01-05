@@ -79,7 +79,7 @@ class _AdminPageState extends State<AdminPage> {
         onPressed: () => Get.toNamed(RouteName.adminEditPage),
       ),
       appBar: AppBar(
-        title: const Text("Admin Page"),
+        title: const Text("landmarks Page"),
         centerTitle: true,
         actions: [
           IconButton(
@@ -121,6 +121,7 @@ class _AdminPageState extends State<AdminPage> {
                               title: country['country_name'],
                               description: country['country_description'],
                               address: "",
+                              rating: "",
                               delete: () =>
                                   deleteCountry(country['country_name']),
                               edit: () {
