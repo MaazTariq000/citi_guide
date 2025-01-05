@@ -35,7 +35,7 @@ class _AdminPageState extends State<AdminPage> {
           .from('country')
           .select('country_name, country_description');
 
-      if (response != null) {
+      if (response.isNotEmpty) {
         countries.value = List<Map<String, dynamic>>.from(response as List);
       } else {
         Get.snackbar('Error', 'No data received',
@@ -96,41 +96,44 @@ class _AdminPageState extends State<AdminPage> {
       drawer: const SideBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "Countries",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Obx(
-              () {
-                if (isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return countries.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: countries.length,
-                        itemBuilder: (context, index) {
-                          final country = countries[index];
-                          return AdminItemList(
-                            navLink: RouteName.adminEditPage,
-                            title: country['country_name'],
-                            description: country['country_description'],
-                            delete: () =>
-                                deleteCountry(country['country_name']),
-                            edit: () {
-                              Get.toNamed(RouteName.adminEditPage,
-                                  arguments: country);
-                            },
-                          );
-                        },
-                      );
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Countries",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Obx(
+                () {
+                  if (isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return countries.isEmpty
+                      ? const Center(child: CircularProgressIndicator())
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: countries.length,
+                          itemBuilder: (context, index) {
+                            final country = countries[index];
+                            return AdminItemList(
+                              navLink: RouteName.adminEditPage,
+                              title: country['country_name'],
+                              description: country['country_description'],
+                              address: "",
+                              delete: () =>
+                                  deleteCountry(country['country_name']),
+                              edit: () {
+                                Get.toNamed(RouteName.adminEditPage,
+                                    arguments: country);
+                              },
+                            );
+                          },
+                        );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

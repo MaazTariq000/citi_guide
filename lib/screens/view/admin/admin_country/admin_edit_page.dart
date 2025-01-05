@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:myapp/routes/route_name.dart';
-import 'package:myapp/services/supabase_service.dart'; // Ensure this is imported
+import 'package:myapp/services/supabase_service.dart';
 
 class AdminEditPage extends StatefulWidget {
   const AdminEditPage({super.key});

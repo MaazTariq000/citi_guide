@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myapp/routes/route_name.dart';
+import 'package:myapp/services/supabase_service.dart';
 
 class AdminLandmarksEditPage extends StatefulWidget {
   const AdminLandmarksEditPage({super.key});
@@ -16,6 +18,94 @@ class _AdminLandmarksEditPageState extends State<AdminLandmarksEditPage> {
       TextEditingController();
   final TextEditingController landmarkReviewsController =
       TextEditingController();
+
+  bool isEditMode = false;
+  String? originalLandmarksName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final Map<String, dynamic>? arguments = Get.arguments;
+    if (arguments != null) {
+      // Edit mode
+      isEditMode = true;
+      originalLandmarksName = arguments['landMark_name'];
+      landmarkController.text = arguments['landMark_name'];
+      landmarkDescriptionController.text = arguments['landMark_description'];
+      landmarkAddressController.text = arguments['landMark_address'];
+    }
+  }
+
+  Future<void> addLandmarks() async {
+    String landmarkName = landmarkController.text.trim();
+    String description = landmarkDescriptionController.text.trim();
+    String address = landmarkAddressController.text.trim();
+
+    if (landmarkName.isEmpty || description.isEmpty || address.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Both fields are required!',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    try {
+      if (isEditMode) {
+        // Update existing country
+        final response = await SupabaseService.client
+            .from('landmarks')
+            .update({
+              'landMark_name': landmarkName,
+              'landMark_description': description,
+              'landMark_address': address,
+            })
+            .eq('landMark_name', originalLandmarksName ?? '')
+            .select();
+
+        if (response.isNotEmpty) {
+          Get.snackbar(
+            'Success',
+            'landmark updated successfully!',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          Get.toNamed(RouteName.adminPage);
+        }
+      } else {
+        // Add new country
+        final response = await SupabaseService.client.from('landmarks').insert({
+          'landMark_name': landmarkName,
+          'landMark_description': description,
+          'landMark_address': address,
+        }).select();
+
+        if (response.isNotEmpty) {
+          Get.snackbar(
+            'Success',
+            'landmark added successfully!',
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
+          Get.toNamed(RouteName.adminLandmarkPage);
+        }
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        e.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +120,9 @@ class _AdminLandmarksEditPageState extends State<AdminLandmarksEditPage> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              addLandmarks();
+            },
             child: const Text("Done"),
           ),
         ],

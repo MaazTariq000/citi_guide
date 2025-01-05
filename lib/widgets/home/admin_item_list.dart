@@ -4,6 +4,7 @@ import 'package:myapp/utils/helpers.dart';
 class AdminItemList extends StatelessWidget {
   final String title;
   final String description;
+  final String address;
   final dynamic navLink;
   final VoidCallback delete;
   final VoidCallback edit;
@@ -15,6 +16,7 @@ class AdminItemList extends StatelessWidget {
     required this.description,
     required this.delete,
     required this.edit,
+    required this.address,
   });
 
   @override
