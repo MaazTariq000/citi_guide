@@ -312,10 +312,7 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 10,
               ),
-              GestureDetector(
-                onTap: () => Get.toNamed(RouteName.destinationPage),
-                child: ListTimeHome(),
-              ),
+              ListTimeHome(),
             ],
           ),
         ),

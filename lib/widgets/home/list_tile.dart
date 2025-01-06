@@ -47,9 +47,8 @@ class ListTimeHome extends StatelessWidget {
               ListTile(
                 leading: CircleAvatar(
                   radius: 30,
-                  backgroundImage:
-                      NetworkImage(item.imageUrl), // Use the imageUrl here
-                  backgroundColor: Colors.grey, // Fallback color
+                  backgroundImage: NetworkImage(item.imageUrl),
+                  backgroundColor: Colors.grey,
                 ),
                 trailing: IconButton(
                   onPressed: () {},
@@ -145,7 +144,7 @@ class ListTimeHome extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 color: Color.fromARGB(124, 158, 158, 158),
                 thickness: 1.0,
                 indent: 10.0,
