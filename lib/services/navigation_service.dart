@@ -12,7 +12,7 @@ class NavigationServices extends GetxService {
 
   List<Widget> pages = [
     const HomePage(),
-    const SearchPage(),
+    SearchPage(),
     const EventPage(),
     const ProfilePage()
   ];

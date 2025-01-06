@@ -4,6 +4,7 @@ class RouteName {
   static String signup = "/signup";
   static String editProfilePage = "/editProfilePage";
   static String destinationPage = "/destinationPage";
+  static String searchPage = "/searchPage";
 
   static String adminPage = "/adminPage";
   static String adminEditPage = "/adminEditPage";

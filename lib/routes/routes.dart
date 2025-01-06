@@ -15,6 +15,7 @@ import 'package:myapp/screens/view/admin/landmarks/admin_landmarks_edit_page.dar
 import 'package:myapp/screens/view/admin/landmarks/admin_landmarks_page.dart';
 import 'package:myapp/screens/view/events/destination_page.dart';
 import 'package:myapp/screens/view/profile/edit_profile_page.dart';
+import 'package:myapp/screens/view/serach/Search_page.dart';
 
 class Routes {
   static final pages = [
@@ -35,9 +36,15 @@ class Routes {
       page: () => const DestinationPage(),
     ),
     GetPage(
-        name: RouteName.editProfilePage,
-        page: () => const EditProfilePage(),
-        transition: Transition.rightToLeft),
+      name: RouteName.editProfilePage,
+      page: () => const EditProfilePage(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: RouteName.searchPage,
+      page: () => SearchPage(),
+      transition: Transition.rightToLeft,
+    ),
     GetPage(
       name: RouteName.adminPage,
       page: () => const AdminPage(),

@@ -47,13 +47,13 @@ class SideBar extends StatelessWidget {
               trailing: Icon(Icons.landscape),
             ),
           ),
-          GestureDetector(
-            onTap: () => Get.toNamed(RouteName.adminEventPage),
-            child: const ListTile(
-              title: Text("Events"),
-              trailing: Icon(Icons.event),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: () => Get.toNamed(RouteName.adminEventPage),
+          //   child: const ListTile(
+          //     title: Text("Events"),
+          //     trailing: Icon(Icons.event),
+          //   ),
+          // ),
         ],
       ),
     );

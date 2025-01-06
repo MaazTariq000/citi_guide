@@ -155,34 +155,40 @@ class _HomePageState extends State<HomePage> {
                     final filterIcon = filterIcons[filter];
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Chip(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                          side: const BorderSide(
-                            color: Color.fromARGB(255, 255, 243, 224),
-                            width: 1.0,
+                      child: GestureDetector(
+                        onTap: () => Get.toNamed(
+                          RouteName.searchPage,
+                          arguments: filter,
+                        ),
+                        child: Chip(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            side: const BorderSide(
+                              color: Color.fromARGB(255, 255, 243, 224),
+                              width: 1.0,
+                            ),
                           ),
+                          label: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                filterIcon,
+                                size: 15,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                filter,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          // backgroundColor: const Color.fromARGB(
+                          //     255, 255, 243, 224),
+                          backgroundColor: const Color(0xFFF88C49),
                         ),
-                        label: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(
-                              filterIcon,
-                              size: 15,
-                              color: Colors.white,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              filter,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        ),
-                        // backgroundColor: const Color.fromARGB(
-                        //     255, 255, 243, 224),
-                        backgroundColor: const Color(0xFFF88C49),
                       ),
                     );
                   },
